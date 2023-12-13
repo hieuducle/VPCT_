@@ -23,6 +23,7 @@ import Login_log from "./system/Login_log";
 import Usage_process from "./help/Usage_process";
 import Infor_software from "./help/Infor_software";
 import Forgot_password from "./account/Forgot_password";
+import AddProgram from "./action/AddProgram";
 
 const Main = () => {
     return (
@@ -50,6 +51,7 @@ const Main = () => {
             <Route exact path="/system/login_log" element={ <Login_log /> }></Route>
             <Route exact path="/information/usage_process" element={ <Usage_process /> }></Route>
             <Route exact path="/information/infor_software" element={ <Infor_software /> }></Route>
+            <Route exact path="/action/addProgram" element={ <AddProgram /> }></Route>
         </Routes>
     )
 }

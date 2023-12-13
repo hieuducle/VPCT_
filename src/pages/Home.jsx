@@ -7,6 +7,7 @@ import Menu from '../components/Menu';
 import Footer from '../components/Footer';
 import '../css/menu.css';
 import Dashboard from '../components/Dashboard'
+import AddProgram from '../components/addProgram';
 
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/table.css';
-import { getProgramsAPI } from "../../src/api/todos";
+import { getProgramsAPI , delProgramsAPI} from "../../src/api/todos";
 
 export default class Dashboard extends Component {
     constructor(props) {
@@ -17,6 +17,13 @@ export default class Dashboard extends Component {
     fetchData = async () => {
         const programs = await getProgramsAPI();
         this.setState({ programs });
+    };
+
+    delProgram = async (id) => {
+        if (window.confirm("Bạn chắc chắn xóa hay không?")) {
+            await delProgramsAPI(id);
+            window.location.reload();
+        }
     };
 
     render() {
@@ -59,7 +66,7 @@ export default class Dashboard extends Component {
                             </div>
                             <div className="col-sm-4">
                                 <td className="project-actions text-right">
-                                    <a className="btn btn-success btn-sm mr-2" href="#">
+                                    <a className="btn btn-success btn-sm mr-2" href="/action/addProgram">
                                     <i className="fas fa-plus" /> Thêm 
                                     </a>
                                     <a className="btn btn-warning btn-sm mr-2" href="#">
@@ -149,7 +156,17 @@ export default class Dashboard extends Component {
                                                                 <i className="fas fa-pencil-alt" /> Nhiệm vụ
                                                                 </a>
                                                             </td>
-                                                            <td></td>
+                                                            <td>
+                                                            <button
+                                                                type="button"
+                                                                aria-label="Delete"
+                                                                title="Delete"
+                                                                onClick={() => this.delProgram(item.id)}
+                                                            >
+                                                                <i className="fas fa-trash" />
+                                                            </button>
+
+                                                            </td>
                                                         </tr>
                                                     ))}
                                                 </tbody>

@@ -49,6 +49,14 @@ export const getUsersAPI = ()  => {
     return axiosClient.get(`${END_POINT.USERROLES}`);
 }
 
+export const delProgramsAPI = (id)  => {
+    return axiosClient.delete(`${END_POINT.CHUONGTRINHS}/${id}`);
+}
+
+export const addProgramsAPI = (chuongTrinh)  => {
+    return axiosClient.post(`${END_POINT.CHUONGTRINHS}`, chuongTrinh);
+}
+
 // export const delTodosAPI = (id)  => {
 //     return axiosClient.delete(`${END_POINT.TODOS}/${id}`);
 // }
