@@ -1,0 +1,174 @@
+import React, { Component } from 'react';
+import '../css/table.css';
+import { getProgramsAPI } from "../../src/api/todos";
+
+export default class Dashboard extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            programs: [],
+        };
+    }
+
+    async componentDidMount() {
+        await this.fetchData();
+    }
+
+    fetchData = async () => {
+        const programs = await getProgramsAPI();
+        this.setState({ programs });
+    };
+
+    render() {
+        const { programs } = this.state;
+
+        return (
+            <div>
+                {/* Content Wrapper. Contains page content */}
+                <div className="content-wrapper">
+                    {/* Content Header (Page header) */}
+                    <section className="content-header">
+                    <div className="container-fluid">
+                        <div className="row border-bottom mb-4 pb-4">
+                            <div className="col-sm-4"></div>
+                            <div className="col-sm-5">
+                                <label className="font-weight-normal" for="reportType">Loại chương trình </label>
+                                <select class="custom-select option-select">
+                                    <option value="" disabled selected hidden>Tất cả</option>
+                                    <option className='opchildren' value="1">Tất cả</option>
+                                    <option className='opchildren' value="2">Chương trình trọng điểm cấp nhà nước</option>
+                                    <option className='opchildren' value="3">Chương trình độc lập quỹ gen</option>
+                                </select>
+                            </div>
+                            <div className="col-sm-3">
+                                <label className="font-weight-normal" for="reportType">Giai đoạn </label>
+                                <select class="custom-select option-select">
+                                    <option value="" disabled selected hidden>Tất cả</option>
+                                    <option className='opchildren' value="1">Tất cả</option>
+                                    <option className='opchildren' value="1">2006-2010</option>
+                                    <option className='opchildren' value="2">2011-2015</option>
+                                    <option className='opchildren' value="3">2016-2020</option>
+                                    <option className='opchildren' value="3">2015-2025</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div className="row mb-2">
+                            <div className="col-sm-2">
+                                <h5>Quản lý chương trình</h5>
+                            </div>
+                            <div className="col-sm-4">
+                                <td className="project-actions text-right">
+                                    <a className="btn btn-success btn-sm mr-2" href="#">
+                                    <i className="fas fa-plus" /> Thêm 
+                                    </a>
+                                    <a className="btn btn-warning btn-sm mr-2" href="#">
+                                    <i className="fas fa-pencil-alt" /> Sửa
+                                    </a>
+                                    <a className="btn btn-danger btn-sm mr-2" href="#">
+                                    <i className="fas fa-trash" /> Xóa
+                                    </a>
+                                    <a className="btn btn-info btn-sm mr-2" href="#">
+                                    <i className="fas fa-redo"></i> Làm mới
+                                    </a>
+                                    <a className="btn btn-warning btn-sm" href="#">
+                                    <i class="far fa-object-group"></i> Hợp nhất
+                                    </a>
+                                </td>
+                            </div>
+                            <div className="col-sm-6">
+                            <ol className="breadcrumb float-sm-right">
+                                <li className="breadcrumb-item"><a href="/home">Chương trình</a></li>
+                                <li className="breadcrumb-item active">Dữ liệu</li>
+                            </ol>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                    {/* Main content */}
+                    <section className="content">
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <table
+                                                id="example1"
+                                                className="table table-responsive table-bordered table-striped"
+                                            >
+                                                <thead>
+                                                    <tr>
+                                                    <th>STT</th>
+                                                    <th></th>
+                                                    <th>Mã số</th>
+                                                    <th>Tên chương trình</th>
+                                                    <th>Chủ nhiệm CT</th>
+                                                    <th>Phó chủ nhiệm CT</th>
+                                                    <th>Ủy viên, Thư ký khoa học</th>
+                                                    <th>Ủy viên</th>
+                                                    <th>Ủy viên</th>
+                                                    <th>Ủy viên</th>
+                                                    <th>Thư ký hành chính</th>
+                                                    <th>Xuất bản</th>
+                                                    <th></th>
+                                                    <th>Tải file</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                
+                                                    {programs.map((item, key) => (
+                                                        <tr key={key}>
+                                                            <td>{key + 1}</td>
+                                                            <td>
+                                                                <div class="form-check text-center">
+                                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                                                                </div>
+                                                            </td>
+                                                            <td>{item.maChuongTrinh}</td>
+                                                            <td>{item.name}</td>
+                                                            <td>{item.president}</td>
+                                                            <td>{item.vicePresident}</td>
+                                                            <td>{item.admin_Secretary}</td>
+                                                            <td>{item.member1}</td>
+                                                            <td>{item.member2}</td>
+                                                            <td>{item.member3}</td>
+                                                            <td>{item.member_Secretary}</td>
+                                                            
+                                                            <td>
+                                                                <div class="form-check text-center">
+                                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked="checked" />
+                                                                </div>
+                                                            </td>
+                                                            <td className="project-actions text-right">
+                                                                <a className="btn btn-info btn-sm mb-1" href="#">
+                                                                <i className="fas fa-pencil-alt" /> Chuyên gia
+                                                                </a>
+                                                                <a className="btn btn-success btn-sm" href="#">
+                                                                <i className="fas fa-pencil-alt" /> Nhiệm vụ
+                                                                </a>
+                                                            </td>
+                                                            <td></td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        {/* /.card-body */}
+                                    </div>
+                                    {/* /.card */}
+                                </div>
+                                {/* /.col */}
+                            </div>
+                            {/* /.row */}
+                        </div>
+                        {/* /.container-fluid */}
+                    </section>
+                    {/* /.content */}
+                </div>
+                {/* /.content-wrapper */}
+            </div>
+        );
+    }
+}
